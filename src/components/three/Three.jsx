@@ -33,13 +33,17 @@ const Three = () => {
         return new MeshStandardMaterial({ color })
     }
 
-    const house = new Group();
-    house.rotation.x = -Math.PI * 0.5
-    
+
     const ground = new Mesh(
         new PlaneBufferGeometry(20,20),
         getMaterial('green')
     )
+
+    const house = new Group();
+    house.rotation.x = -Math.PI * 0.5
+    house.rotation.y = -Math.PI * 0.25
+
+    ground.rotation.z = -Math.PI * 0.25
 
 
     ground.geometry.setAttribute(
@@ -112,7 +116,6 @@ const Three = () => {
     walls.receiveShadow = true
     groundFloor.add(walls)
     
-    // house.rotation.y = -Math.PI * 0.25
 
 
     /// creating window
@@ -283,6 +286,41 @@ const Three = () => {
     groundFloor.add(customSunShade)
 
 
+    const roof = new Group()
+    const roof1 = new Mesh(
+        new BoxBufferGeometry(10,0.1,6.4),
+        getMaterial('#454545')
+    )
+
+    const roof1Top = new Mesh(
+        new BoxBufferGeometry(10.1,0.3,6.5),
+        getMaterial('azure')
+    )
+    
+    roof1.position.set(0,-5.71,3.75)
+    roof1Top.position.set(0,-5.91,3.85)
+
+    roof.add(roof1Top)
+    roof.add(roof1)
+
+    const roof2 = new Mesh(
+        new BoxBufferGeometry(7,0.1,3.8),
+        getMaterial('#454545')
+    )
+
+    roof2.position.set(1.5,-5.71,-0.8)
+
+    const roof2Top = new Mesh(
+        new BoxBufferGeometry(7.1,0.3,3.9),
+        getMaterial('azure')
+    )
+    roof2Top.position.set(1.6,-5.91,-0.9)
+
+
+    roof.add(roof2)
+    roof.add(roof2Top)
+
+    firstFloor.add(roof)
     house.add(firstFloor)
     scene.add(ground)
     scene.add(house)
@@ -306,7 +344,7 @@ const Three = () => {
   return (
     <>
        <OrbitControls />
-       <perspectiveCamera args={[50, window.innerWidth/window.innerHeight]}/>
+       <perspectiveCamera args={[75, window.innerWidth/window.innerHeight]}/>
        <ambientLight args={[0xffffff, 0.5]}/>
        {/* <mesh ref={groundRef}>
             <planeBufferGeometry args={[20,20]}/>
