@@ -1,7 +1,7 @@
 import { OrbitControls, useTexture } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef } from 'react'
-import { AxesHelper, BoxBufferGeometry, DirectionalLight, DirectionalLightHelper, Float32BufferAttribute, Group, Mesh, MeshStandardMaterial, PlaneBufferGeometry } from 'three';
+import { AxesHelper, BoxBufferGeometry, DirectionalLight, DirectionalLightHelper, Float32BufferAttribute, Group, Mesh, MeshStandardMaterial, PerspectiveCamera, PlaneBufferGeometry, Vector3 } from 'three';
 import * as THREE from  'three'
 
 const Three = () => {
@@ -138,6 +138,8 @@ const Three = () => {
         'uv2',
         new Float32BufferAttribute(door.geometry.attributes.uv.array,2)
         )
+
+      door.position.z = 0.89  
 
      groundFloor.add(door)
     /// creating the side wall
@@ -322,6 +324,13 @@ const Three = () => {
 
     firstFloor.add(roof)
     house.add(firstFloor)
+
+    house.scale.set(0.2,0.2,0.2)
+    house.rotation.x = -Math.PI
+    ground.rotation.x = -Math.PI * 0.5
+    ground.scale.set(0.2,0.2,0.2)
+
+    
     scene.add(ground)
     scene.add(house)
 
@@ -331,9 +340,17 @@ const Three = () => {
     directionLight.castShadow = true
     scene.add(directionLight)
 
+    const camera = new PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1000)
+    camera.position.set(0,0,-20)
+
+    // console.log(camera);
+    scene.add(camera)
+
 
     useFrame(({ mouse,clock }) => {
         const elapsedTime = clock.getElapsedTime()
+    camera.lookAt(house.position)
+
         // if(groundRef.current){
         //     groundRef.current.rotation.z = mouse.x;
         //     house.rotation.y = -mouse.x
@@ -344,7 +361,6 @@ const Three = () => {
   return (
     <>
        <OrbitControls />
-       <perspectiveCamera args={[75, window.innerWidth/window.innerHeight]}/>
        <ambientLight args={[0xffffff, 0.5]}/>
        {/* <mesh ref={groundRef}>
             <planeBufferGeometry args={[20,20]}/>
