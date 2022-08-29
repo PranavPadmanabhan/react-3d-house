@@ -22,6 +22,8 @@ const Three = () => {
     const doormetalNess = useTexture('/textures/door/metalness.jpg')
     const doorRoughness = useTexture('/textures/door/roughness.jpg')
     const height = useTexture('/textures/door/height.jpg')
+    const windowTexture = useTexture('/window.png')
+
 
 
 
@@ -122,9 +124,9 @@ const Three = () => {
 
     const door = new Mesh(
         new PlaneBufferGeometry(1.7,1.7),
-        getMaterial('white')
+        getMaterial('orange')
     )
-     door.position.set(-3,-1,0.8)
+     door.position.set(-3,-1.05,0.7)
      door.rotation.x = Math.PI 
      door.material.map = doorColor
      door.material.alphaMap = doorAlpha
@@ -175,6 +177,92 @@ const Three = () => {
 
     pillar.rotation.y = Math.PI * 0.5
 
+
+    const window1 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window1.material.map = windowTexture
+    window1.position.set(-4.515,-1.4,2)
+    window1.rotation.y = -Math.PI * 0.5
+
+    groundFloor.add(window1)
+
+    const window2 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window2.material.map = windowTexture
+    window2.position.set(-4.515,-1.4,5.4)
+    window2.rotation.y = -Math.PI * 0.5
+
+    groundFloor.add(window2)
+
+    const window3 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window3.material.map = windowTexture
+    window3.position.set(-4.515,-4.2,3.8)
+    window3.rotation.y = -Math.PI * 0.5
+
+    groundFloor.add(window3)
+
+    const window4 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window4.material.map = windowTexture
+    window4.position.set(4.515,-1.35,4.8)
+    window4.rotation.y = Math.PI * 0.5
+
+    groundFloor.add(window4)
+
+    const window5 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window5.material.map = windowTexture
+    window5.position.set(4.515,-1.35,1.4)
+    window5.rotation.y = Math.PI * 0.5
+
+    groundFloor.add(window5)
+
+     const window6 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window6.material.map = windowTexture
+    window6.position.set(4.515,-4.25,3.2)
+    window6.rotation.y = Math.PI * 0.5
+
+    groundFloor.add(window6)
+
+    const window7 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+     window7.rotation.y = Math.PI
+     window7.material.map = windowTexture
+     window7.position.set(-1,-1.15,0.7)
+
+    groundFloor.add(window7)
+
+    const window8 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+     window8.rotation.y = Math.PI
+     window8.material.map = windowTexture
+     window8.position.set(3,-1.15,0.7)
+
+    groundFloor.add(window8)
 
     /// creating first floor
 
