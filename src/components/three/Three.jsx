@@ -23,6 +23,8 @@ const Three = () => {
     const doorRoughness = useTexture('/textures/door/roughness.jpg')
     const height = useTexture('/textures/door/height.jpg')
     const windowTexture = useTexture('/window.png')
+    const glassTexture = useTexture('/glass-1.png')
+
 
 
 
@@ -107,6 +109,9 @@ const Three = () => {
     groundFloor.receiveShadow = true
     
 
+    const firstFloor = new Group()
+
+
     ///creating wall
     const walls = new Mesh(
         new BoxBufferGeometry( 9, 2.5, 6 ),
@@ -187,7 +192,6 @@ const Three = () => {
     window1.position.set(-4.515,-1.4,2)
     window1.rotation.y = -Math.PI * 0.5
 
-    groundFloor.add(window1)
 
     const window2 = new Mesh(
         new PlaneBufferGeometry(1.5,1.5),
@@ -198,7 +202,6 @@ const Three = () => {
     window2.position.set(-4.515,-1.4,5.4)
     window2.rotation.y = -Math.PI * 0.5
 
-    groundFloor.add(window2)
 
     const window3 = new Mesh(
         new PlaneBufferGeometry(1.5,1.5),
@@ -209,7 +212,6 @@ const Three = () => {
     window3.position.set(-4.515,-4.2,3.8)
     window3.rotation.y = -Math.PI * 0.5
 
-    groundFloor.add(window3)
 
     const window4 = new Mesh(
         new PlaneBufferGeometry(1.5,1.5),
@@ -220,7 +222,6 @@ const Three = () => {
     window4.position.set(4.515,-1.35,4.8)
     window4.rotation.y = Math.PI * 0.5
 
-    groundFloor.add(window4)
 
     const window5 = new Mesh(
         new PlaneBufferGeometry(1.5,1.5),
@@ -231,7 +232,6 @@ const Three = () => {
     window5.position.set(4.515,-1.35,1.4)
     window5.rotation.y = Math.PI * 0.5
 
-    groundFloor.add(window5)
 
      const window6 = new Mesh(
         new PlaneBufferGeometry(1.5,1.5),
@@ -242,7 +242,7 @@ const Three = () => {
     window6.position.set(4.515,-4.25,3.2)
     window6.rotation.y = Math.PI * 0.5
 
-    groundFloor.add(window6)
+
 
     const window7 = new Mesh(
         new PlaneBufferGeometry(1.5,1.5),
@@ -252,7 +252,6 @@ const Three = () => {
      window7.material.map = windowTexture
      window7.position.set(-1,-1.15,0.7)
 
-    groundFloor.add(window7)
 
     const window8 = new Mesh(
         new PlaneBufferGeometry(1.5,1.5),
@@ -262,11 +261,141 @@ const Three = () => {
      window8.material.map = windowTexture
      window8.position.set(3,-1.15,0.7)
 
-    groundFloor.add(window8)
+     const window9 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window9.material.map = windowTexture
+    window9.position.set(2.5,-4.25,6.7)
+    // window9.rotation.y = -Math.PI 
+
+    const window10 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window10.material.map = windowTexture
+    window10.position.set(-2.4,-4.25,6.7)
+    // window9.rotation.y = -Math.PI 
+    const window11 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+
+    window11.material.map = windowTexture
+    window11.position.set(-2.4,-1.25,6.92)
+    // window9.rotation.y = -Math.PI 
+
+    const window12 = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+     window12.rotation.y = Math.PI
+     window12.material.map = windowTexture
+     window12.position.set(-3,-4.2,0.57)
+
+
+
+    const backDoor = new Mesh(
+        new PlaneBufferGeometry(1.7,2),
+        getMaterial('orange')
+    )
+     backDoor.position.set(2.5,-1.10,6.92)
+     backDoor.rotation.z = - Math.PI
+     backDoor.material.map = doorColor
+     backDoor.material.alphaMap = doorAlpha
+     backDoor.material.transparent = true
+     backDoor.material.normalMap = doornormal
+     backDoor.material.aoMap = doorAo
+     backDoor.material.roughnessMap = doorRoughness
+     backDoor.material.metalnessMap = doormetalNess
+
+     backDoor.geometry.setAttribute(
+        'uv2',
+        new Float32BufferAttribute(backDoor.geometry.attributes.uv.array,2)
+        )
+
+   const step = new Mesh(
+    new BoxBufferGeometry(1.5,0.13,0.8),
+    getMaterial('azure')
+   )
+
+   step.position.set(2.5,-0.07,6.92)
+
+    groundFloor.add(window1,window2,window4,window5,window7,window8,window11,backDoor,step)
+    firstFloor.add(window3,window6,window9,window10,window12)
 
     /// creating first floor
 
-    const firstFloor = new Group()
+
+    const sitOutDoor = new Mesh(
+        new PlaneBufferGeometry(1.7,1.9),
+        getMaterial('orange')
+    )
+     sitOutDoor.position.set(-0.1,-3.6,-2.42)
+     sitOutDoor.rotation.x = Math.PI 
+     sitOutDoor.material.map = doorColor
+     sitOutDoor.material.alphaMap = doorAlpha
+     sitOutDoor.material.transparent = true
+     sitOutDoor.material.normalMap = doornormal
+     sitOutDoor.material.aoMap = doorAo
+     sitOutDoor.material.roughnessMap = doorRoughness
+     sitOutDoor.material.metalnessMap = doormetalNess
+
+     sitOutDoor.geometry.setAttribute(
+        'uv2',
+        new Float32BufferAttribute(sitOutDoor.geometry.attributes.uv.array,2)
+        )
+
+
+    const sitOutWindow = new Mesh(
+        new PlaneBufferGeometry(1.5,1.5),
+        getMaterial('orange')
+    )
+    sitOutWindow.rotation.y = Math.PI
+    sitOutWindow.material.map = windowTexture
+     sitOutWindow.position.set(2.8,-3.9,-2.415)
+
+
+     firstFloor.add(sitOutDoor,sitOutWindow)
+
+
+     const sidewall1 = new Mesh(
+        new BoxBufferGeometry(3,0.2,0.9),
+        getMaterial('#454545')
+    )
+
+    sidewall1.position.set(-3.01,-2.9,0.17)
+
+    const sidewall2 = new Mesh(
+        new BoxBufferGeometry(0.2,2.48,0.9),
+        getMaterial('#454545')
+    )
+
+    sidewall2.position.set(-4.41,-4.15,0.17)
+
+
+    const sidewall3 = new Mesh(
+        new BoxBufferGeometry(3,0.2,0.9),
+        getMaterial('#454545')
+    )
+    sidewall3.position.set(-3.01,-5.4,0.17)
+
+
+    firstFloor.add(sidewall1,sidewall2,sidewall3)
+
+    const glass = new Mesh(
+        new PlaneBufferGeometry(5.96,2.3),
+        getMaterial('transparent')
+    )
+
+    glass.position.set(1.5,-4,-3.02)
+    glass.material.transparent = true
+    glass.material.map = glassTexture
+    glass.rotation.y = Math.PI
+
+  firstFloor.add(glass)
 
     const floor = new Mesh(
         new BoxBufferGeometry(10,0.3,8),
@@ -411,13 +540,13 @@ const Three = () => {
     roof.add(roof2Top)
 
     firstFloor.add(roof)
-    house.add(firstFloor)
 
     house.scale.set(0.2,0.2,0.2)
     house.rotation.x = -Math.PI
     ground.rotation.x = -Math.PI * 0.5
     ground.scale.set(0.2,0.2,0.2)
 
+    house.add(firstFloor)
     
     scene.add(ground)
     scene.add(house)
